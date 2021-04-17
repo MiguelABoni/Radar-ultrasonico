@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+body{
+    position: relative;
+    margin: 0;
+    padding: 0;
+    font-family: 'Kanit', sans-serif;
+}
+.radar, .sweep { position: relative; }
+.radar {
+  width: 100vw; height: 100vh;
+  /* background: 
+    repeating-radial-gradient(transparent, transparent 23px, #287a33 25px, #287a33 27px), 
+    linear-gradient(transparent 49.75%, #0e4c42 49.75%, #0e4c42 50.25%, transparent 50.25%) 50% no-repeat,
+    linear-gradient(90deg, transparent 49.75%, #0e4c42 49.75%, #0e4c42 50.25%, transparent 50.25%) 50% no-repeat,
+    linear-gradient(#202020, #111); */
+    background: repeating-radial-gradient(circle at 50% 79%, #24a533, #24a533 3.5px, #1a1a19 5px, #1a1a19 10%);;
+    /* background-size: 100%, 218px 218px, 218px 218px, 100%; */
+}
+.startButton{
+    display: none;
+}
+.sweep {
+  box-sizing: border-box;
+  top: 16px; left: 16px;
+  border-right: solid 1px #33995d4d;
+  width: 108px; height: 108px;
+  border-radius: 100% 0 0 0;
+  transform-origin: 100% 100%;
+  background: linear-gradient(50deg, #33995d86 56%, #33995d18);
+  animation: sweep 2s infinite linear;
+}
+
+.panel{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    padding:.5em;
+    background-color: #000501;
+}
+.object,.angle,.distance{
+    letter-spacing: .15em;
+    color: #4dd85e;
+    font-size: 1em;
+    margin-bottom: .5em;
+}
+@keyframes sweep { 
+    0% { 
+        transform: rotate(90deg); 
+    }
+    50% { 
+        transform: rotate(0deg); 
+    }
+    100% { 
+        transform: rotate(90deg); 
+    }
+
+}
