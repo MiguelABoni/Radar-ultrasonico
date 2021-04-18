@@ -7,27 +7,47 @@ body{
 }
 .radar, .sweep { position: relative; }
 .radar {
-  width: 100vw; height: 100vh;
+    display: flex;
+    justify-content: center;
+    width: 100vw; height: 100vh;
   /* background: 
     repeating-radial-gradient(transparent, transparent 23px, #287a33 25px, #287a33 27px), 
     linear-gradient(transparent 49.75%, #0e4c42 49.75%, #0e4c42 50.25%, transparent 50.25%) 50% no-repeat,
     linear-gradient(90deg, transparent 49.75%, #0e4c42 49.75%, #0e4c42 50.25%, transparent 50.25%) 50% no-repeat,
     linear-gradient(#202020, #111); */
-    background: repeating-radial-gradient(circle at 50% 79%, #24a533, #24a533 3.5px, #1a1a19 5px, #1a1a19 10%);;
+    background: repeating-radial-gradient(circle at 50% 65%, #24a533, #24a533 3.5px, #1a1a19 5px, #1a1a19 10%);;
     /* background-size: 100%, 218px 218px, 218px 218px, 100%; */
 }
 .startButton{
-    display: none;
+    z-index: 1;
+    position: absolute;
+    bottom: 2.354em;
+    right: 32.9vw;
+    border: none;
+    background-color: #4dd85e;
+    color: #000501;
+    border-radius: 1em;
+    font-size: 1em;
+    font-weight: bold;
+    font-family: 'Kanit', sans-serif;
+    padding: .5em;
 }
 .sweep {
-  box-sizing: border-box;
-  top: 16px; left: 16px;
-  border-right: solid 1px #33995d4d;
-  width: 108px; height: 108px;
-  border-radius: 100% 0 0 0;
-  transform-origin: 100% 100%;
-  background: linear-gradient(50deg, #33995d86 56%, #33995d18);
-  animation: sweep 2s infinite linear;
+    position: absolute;
+    bottom: 6em;
+    box-sizing: border-box;
+    border-radius: 0 0 0 100%;
+    border-right: solid 1px #4dd85d8e;
+    margin-right: 5em;
+    width: 5em;
+    /* background: linear-gradient(80deg, rgba(34, 34, 34, 0) 56%, #4dd85e); */
+    /* border-radius: 0 0 100% 0; */
+    /* margin-left: 5em; */
+    /* background: linear-gradient(80deg,  #4dd85e 56%, #22222200); */
+    /* border-left: solid 1px #33995d4d; */
+    height: 50vw;
+    transform-origin: 100% 100%;
+    animation: sweep 5s infinite linear;
 }
 
 .panel{
@@ -36,7 +56,9 @@ body{
     left: 0;
     right: 0;
     display: flex;
-    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 2em;
     padding:.5em;
     background-color: #000501;
 }
@@ -44,17 +66,16 @@ body{
     letter-spacing: .15em;
     color: #4dd85e;
     font-size: 1em;
-    margin-bottom: .5em;
 }
 @keyframes sweep { 
-    0% { 
-        transform: rotate(90deg); 
+    0% {
+        transform: rotate(-90deg); 
     }
     50% { 
-        transform: rotate(0deg); 
-    }
-    100% { 
         transform: rotate(90deg); 
+    }
+    100% {
+        transform: rotate(-90deg); 
     }
 
 }
