@@ -1,4 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
+
+html{
+    overflow: hidden;
+}
+
 body{
     position: relative;
     margin: 0;
@@ -9,13 +14,14 @@ body{
 .radar {
     display: flex;
     justify-content: center;
-    width: 100vw; height: 100vh;
+    width: 100vw;
+    height: 100vh;
   /* background: 
     repeating-radial-gradient(transparent, transparent 23px, #287a33 25px, #287a33 27px), 
     linear-gradient(transparent 49.75%, #0e4c42 49.75%, #0e4c42 50.25%, transparent 50.25%) 50% no-repeat,
     linear-gradient(90deg, transparent 49.75%, #0e4c42 49.75%, #0e4c42 50.25%, transparent 50.25%) 50% no-repeat,
     linear-gradient(#202020, #111); */
-    background: repeating-radial-gradient(circle at 50% 65%, #24a533, #24a533 3.5px, #1a1a19 5px, #1a1a19 10%);;
+    background: repeating-radial-gradient(circle at 50% 86.5vh, #24a533, #24a533 3.5px, #1a1a19 5px, #1a1a19 10%);;
     /* background-size: 100%, 218px 218px, 218px 218px, 100%; */
 }
 .startButton{
@@ -23,7 +29,7 @@ body{
     height: fit-content;
     padding: .5em;
     align-self: flex-end;
-    margin-bottom: 2.3em;
+    margin-bottom: 10vh;
     border: none;
     background-color: #4dd85e;
     color: #000501;
@@ -36,7 +42,7 @@ body{
 }
 .sweep {
     position: absolute;
-    bottom: 6em;
+    bottom: 13.5vh;
     box-sizing: border-box;
     border-radius: 0 0 0 100%;
     border-right: solid 1px #4dd85d8e;
@@ -47,9 +53,9 @@ body{
     /* margin-left: 5em; */
     /* background: linear-gradient(80deg,  #4dd85e 56%, #22222200); */
     /* border-left: solid 1px #33995d4d; */
-    height: 50vw;
+    height: 42vw;
     transform-origin: 100% 100%;
-    animation: sweep 5s infinite linear;
+    animation: sweep 10s infinite linear;
 }
 
 .panel{
@@ -60,8 +66,8 @@ body{
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    height: 2em;
-    padding:.5em;
+    height: 7.5vh;
+    padding:3vh;
     background-color: #000501;
 }
 .object,.angle,.distance{
@@ -71,28 +77,35 @@ body{
 }
 @media screen and (min-width: 768px){
     .panel{
-        height: 2.5em;
+        height: 8.5vh;
         padding-right: 13em;
     }
     .startButton{
         margin-right: -75%;
-        margin-bottom: .5em;
+        margin-bottom: 2vh;
+    }
+    .radar{
+        background: repeating-radial-gradient(circle at 50% 85.5vh, #24a533, #24a533 3.5px, #1a1a19 5px, #1a1a19 10%);
+    }
+    .sweep{
+        bottom:14.5vh;
     }
 }
 @media screen and (min-width: 1024px){
     .panel{
+        height: 4.5vh;
         padding-right: 25em;
     }
-    .startButton{
-
+    .radar{
+        background: repeating-radial-gradient(circle at 50% 89.5vh, #24a533, #24a533 3.5px, #1a1a19 5px, #1a1a19 10%);
+    }
+    .sweep{
+        bottom:10.5vh;
     }
 }
 @media screen and (min-width: 1280px){
     .panel{
         padding-right: 40em;
-    }
-    .startButton{
-
     }
 }
 @keyframes sweep { 
