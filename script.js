@@ -1,4 +1,4 @@
-const ESPURL = "http://192.168.0.100";
+const ESPURL = "http://192.168.0.107";
 const BUTTON = document.querySelector(".startButton"); 
 const fetchDistance = async (angle) => {
     try{
