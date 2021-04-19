@@ -55,7 +55,8 @@ body{
     /* border-left: solid 1px #33995d4d; */
     height: 42vw;
     transform-origin: 100% 100%;
-    animation: sweep 10s infinite linear;
+    transition: .1s ease;
+    transform: rotate(-90deg); 
 }
 
 .panel{
@@ -108,7 +109,7 @@ body{
         padding-right: 40em;
     }
 }
-@keyframes sweep { 
+/* @keyframes sweep { 
     0% {
         transform: rotate(-90deg); 
     }
@@ -119,4 +120,4 @@ body{
         transform: rotate(-90deg); 
     }
 
-}
+} */

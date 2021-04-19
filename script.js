@@ -1,4 +1,7 @@
 const ESPURL = "http://192.168.0.107";
+const ANGLESTATUS = document.querySelector(".angleStatus");
+const DISTANCESTATUS = document.querySelector(".distanceStatus");
+const SWEEP = document.querySelector(".sweep");
 const BUTTON = document.querySelector(".startButton"); 
 const fetchDistance = async (angle) => {
     try{
@@ -16,16 +19,18 @@ const fetchDistance = async (angle) => {
 };
 
 const startScanning= async()=>{
-    setInterval(()=>{
-    BUTTON.click();
-    },24000);
     // BUTTON.addEventListener('click', stopScanning);  
-    for (let i = 15; i <= 165; i++) {
-        console.log(await fetchDistance(i));
+    for (let i = 0; i <= 180; i++) {
+        DISTANCESTATUS.innerHTML= await fetchDistance(i) + "cm";
+        ANGLESTATUS.innerHTML= i + "°";
+        SWEEP.style.transform= `rotate(${i-90}deg)`
     }
-    for (let i = 164; i >=16; i--) {
-        console.log(await fetchDistance(i));
+    for (let i = 179; i >=1; i--) {
+        DISTANCESTATUS.innerHTML= await fetchDistance(i) + "cm";
+        ANGLESTATUS.innerHTML= i + "°";
+        SWEEP.style.transform= `rotate(${i-90}deg)`
     }
+    BUTTON.click();
 }
 
 BUTTON.addEventListener('click', startScanning);
