@@ -51,24 +51,9 @@ void loop(){
             client.println("Access-Control-Allow-Headers: Angulo,Longitud");
             client.println("Connection: close");
             client.println();
-            
-            // Muestra la página web
-            //angulo = "\"15\":\"15\","; 
-            //json+=angulo;
 
-            /*for(int i=15; i<=164; i++){
-              //Poner a girar el servo
-              angulo = "\""+String(i)+"\":\""+String(i)+"\","; 
-              json+=angulo;              
-            }
-            angulo = "\"165\":\"165\""; 
-            json+=angulo;
-            json+="}}";
-            client.println(json);
-            json="{\"angulo\":{";*/
             longitud_angulo=header.substring(header.indexOf("longitud")+10,header.indexOf("longitud:")+11);
             angulo=header.substring(header.indexOf("angulo")+8,header.indexOf("angulo")+8+longitud_angulo.toInt());
-            Serial.println(angulo);
             
             client.println("{\"distancia\":\""+angulo+"\"}");              
             // la respuesta HTTP temina con una linea en blanco

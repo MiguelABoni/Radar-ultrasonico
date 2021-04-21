@@ -1,4 +1,4 @@
-const ESPURL = "http://192.168.0.107";
+const ESPURL = "http://192.168.0.110";
 const ANGLESTATUS = document.querySelector(".angleStatus");
 const DISTANCESTATUS = document.querySelector(".distanceStatus");
 const SWEEP = document.querySelector(".sweep");
