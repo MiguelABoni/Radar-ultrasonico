@@ -1,4 +1,4 @@
-const ESPURL = "http://192.168.0.110";
+const ESPURL = "http://192.168.0.103";
 const ANGLESTATUS = document.querySelector(".angleStatus");
 const DISTANCESTATUS = document.querySelector(".distanceStatus");
 const SWEEP = document.querySelector(".sweep");
@@ -19,6 +19,8 @@ const fetchDistance = async (angle) => {
 };
 
 const startScanning= async()=>{
+
+    BUTTON.classList.add("stopButton");
     // BUTTON.addEventListener('click', stopScanning);  
     for (let i = 0; i <= 180; i++) {
         DISTANCESTATUS.innerHTML= await fetchDistance(i) + "cm";

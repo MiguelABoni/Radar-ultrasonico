@@ -50,6 +50,19 @@ body{
     font-family: 'Kanit', sans-serif;
     outline: none;
     cursor: pointer;
+    transition: .5s ease;
+}
+.startButton:hover{
+    background-color: #4dd85d7e;
+}
+
+.stopButton{
+    background-color: #d84d4d;
+    color: #fef8f8;
+}
+
+.stopButton:hover{
+    background-color: #d84d4d80;
 }
 .sweep,.angleSweep{
     box-sizing: border-box;
@@ -60,12 +73,13 @@ body{
 .angleSweep{
     width: 1px;
     height: 42vw;
-    background-color: #24a533;
-}
+    /* background-color: #24a533; */
+    background: linear-gradient(93deg, rgba(245,0,0,1) 70%, rgba(0,255,12,1) 30%);
+    }
 .angleSweep span{
     margin-left: .5em;
     font-size: 1.2em;
-    color: white;
+    color: #24a533;
 }
 .angleSweep:nth-of-type(1){
     bottom: 13.8vh;
@@ -98,7 +112,7 @@ body{
     margin-right: 10em;
     border-right: solid 1px #4dd85d8e;
     border-radius: 0 0 0 100%;
-    background: linear-gradient(80deg, rgba(34, 34, 34, 0) 56%, #4dd85e);
+    /* background: linear-gradient(80deg, rgba(34, 34, 34, 0) 56%, #4dd85e); */
     /* border-radius: 0 0 100% 0; */
     /* margin-left: 5em; */
     /*background: linear-gradient(80deg,  #4dd85e 56%, #22222200);*/
