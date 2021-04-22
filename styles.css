@@ -11,11 +11,9 @@
 */
 
 @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
-
 html{
     overflow: hidden;
 }
-
 body{
     position: relative;
     margin: 0;
@@ -38,10 +36,11 @@ body{
 }
 .startButton{
     z-index: 1;
+    position: absolute;
     height: fit-content;
     padding: .5em;
     align-self: flex-end;
-    margin-bottom: 10vh;
+    margin-bottom: 8vh;
     border: none;
     background-color: #4dd85e;
     color: #000501;
@@ -53,9 +52,9 @@ body{
     cursor: pointer;
 }
 .sweep,.angleSweep{
+    box-sizing: border-box;
     position: absolute;
     bottom: 13.5vh;
-    box-sizing: border-box;
     transform-origin: 100% 100%;
 }
 .angleSweep{
@@ -69,8 +68,8 @@ body{
     color: white;
 }
 .angleSweep:nth-of-type(1){
+    bottom: 13.8vh;
     transform: rotate(-90deg);
-    bottom: 13.7vh;
 }
 .angleSweep:nth-of-type(2){
     transform: rotate(-60deg);
@@ -88,15 +87,17 @@ body{
     transform: rotate(60deg); 
 }
 .angleSweep:nth-of-type(7){
-    transform: rotate(90deg); 
+    transform: rotate(90deg);
 }
-
+.angleSweep:nth-of-type(7) span{
+    margin-left: -2.2em;
+}
 .sweep {
-    border-radius: 0 0 0 100%;
-    border-right: solid 1px #4dd85d8e;
-    margin-right: 10em;
     width: 10em;
     height: 42vw;
+    margin-right: 10em;
+    border-right: solid 1px #4dd85d8e;
+    border-radius: 0 0 0 100%;
     background: linear-gradient(80deg, rgba(34, 34, 34, 0) 56%, #4dd85e);
     /* border-radius: 0 0 100% 0; */
     /* margin-left: 5em; */
@@ -105,7 +106,6 @@ body{
     transition: .1s ease;
     transform: rotate(-90deg); 
 }
-
 .panel{
     position: absolute;
     bottom: 0;
@@ -123,14 +123,26 @@ body{
     color: #4dd85e;
     font-size: 1em;
 }
+.objectStatus,.angleStatus,.distanceStatus{
+    display: inline-block;
+}
+.objectStatus{
+    width: 140px;
+}
+.angleStatus{
+    width: 40px;
+}
+.distanceStatus{
+    width: 60px;
+}
 @media screen and (min-width: 768px){
     .panel{
         height: 8.5vh;
-        padding-right: 13em;
     }
     .startButton{
-        margin-right: -75%;
-        margin-bottom: 2vh;
+        position: relative;
+        margin-bottom: 0;
+        align-self: auto;
     }
     .radar{
         background: repeating-radial-gradient(circle at 50% 85.5vh, #24a533, #24a533 3.5px, #1a1a19 5px, #1a1a19 10%);
@@ -145,7 +157,6 @@ body{
 @media screen and (min-width: 1024px){
     .panel{
         height: 4.5vh;
-        padding-right: 25em;
     }
     .radar{
         background: repeating-radial-gradient(circle at 50% 89.5vh, #24a533, #24a533 3.5px, #1a1a19 5px, #1a1a19 10%);
@@ -154,12 +165,10 @@ body{
         bottom:10.5vh;
     }
     .angleSweep:nth-of-type(1){
-        transform: rotate(-90deg);
         bottom: 10.7vh;
     }
 }
 @media screen and (min-width: 1280px){
     .panel{
-        padding-right: 40em;
     }
 }
