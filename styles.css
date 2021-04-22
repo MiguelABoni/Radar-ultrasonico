@@ -34,16 +34,15 @@ body{
     background: repeating-radial-gradient(circle at 50% 86.5vh, #24a533, #24a533 3.5px, #1a1a19 5px, #1a1a19 10%);;
     /* background-size: 100%, 218px 218px, 218px 218px, 100%; */
 }
-.startButton{
+.startButton,.stopButton{
     z-index: 1;
     position: absolute;
+    width: 169px;
     height: fit-content;
     padding: .5em;
     align-self: flex-end;
     margin-bottom: 8vh;
     border: none;
-    background-color: #4dd85e;
-    color: #000501;
     border-radius: 1em;
     font-size: 1em;
     font-weight: bold;
@@ -52,17 +51,22 @@ body{
     cursor: pointer;
     transition: .5s ease;
 }
+.startButton{
+    background-color: #4dd85e;
+    color: #000501;
+}
 .startButton:hover{
     background-color: #4dd85d7e;
 }
 
 .stopButton{
-    background-color: #d84d4d;
-    color: #fef8f8;
+    display: none;
+    background-color: #b90000;
+    color: #e2d5d5;
 }
 
 .stopButton:hover{
-    background-color: #d84d4d80;
+    background-color: #b900009d;
 }
 .sweep, .angleSweep, .objectSweep{
     box-sizing: border-box;
@@ -75,7 +79,7 @@ body{
 .objectSweep{
     width: 1px;
     animation: fade-out;
-    animation-duration: 2.5s;
+    animation-duration: 4s;
     opacity: 0;
 }
 
@@ -160,7 +164,7 @@ body{
     .panel{
         height: 8.5vh;
     }
-    .startButton{
+    .startButton, .stopButton{
         position: relative;
         margin-bottom: 0;
         align-self: auto;

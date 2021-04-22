@@ -1,10 +1,12 @@
 const ESPURL = "http://192.168.0.105";
 const ANGLESTATUS = document.querySelector(".angleStatus");
 const DISTANCESTATUS = document.querySelector(".distanceStatus");
-const SWEEP = document.querySelector(".sweep");
-const BUTTON = document.querySelector(".startButton"); 
+const OBJECTSTATUS = document.querySelector(".objectStatus");
+const STARTBUTTON = document.querySelector(".startButton");
+const STOPBUTTON = document.querySelector(".stopButton");
 const RADAR = document.querySelector(".radar");
-let percentage_distance=0;
+let percentage_distance = 0;
+let flag = true;
 
 
 const fetchDistance = async (angle) => {
@@ -22,39 +24,54 @@ const fetchDistance = async (angle) => {
     }
 };
 
-// const stopScanning = ()=>{
-    
-    // }
-    
-    
-const startScanning= async()=>{
-    // BUTTON.classList.add("stopButton");
-    // BUTTON.addEventListener('click', stopScanning);  
-    for (let i = 0; i <= 180; i++) {   
-        let object_sweep = document.createElement("div");
-        object_sweep.classList.add('objectSweep');
-        distance = await fetchDistance(i);
-        percentage_distance= (parseInt(distance)*100)/100;
-        object_sweep.style.background = `linear-gradient(0deg, rgba(0,255,12,1) ${100-percentage_distance}%, rgba(245,0,0,1) ${100-percentage_distance}%)`;
-        object_sweep.style.transform = `rotate(${i-90}deg)`;
-        RADAR.appendChild(object_sweep);
-        DISTANCESTATUS.innerHTML=  distance + "cm";
-        ANGLESTATUS.innerHTML= i + "°";
-        SWEEP.style.transform= `rotate(${i-90}deg)`
+const startScanning = async()=>{
+    STARTBUTTON.style.display = "none";
+    STOPBUTTON.style.display = "block";
+    for (let i = 0; i <= 180; i++) {
+        if(!flag){
+            break;
+        }
+        await renderObject(i);
     }
     for (let i = 179; i >=1; i--) {
-        let object_sweep = document.createElement("div");
-        object_sweep.classList.add('objectSweep');
-        distance = await fetchDistance(i);
-        percentage_distance= (parseInt(distance)*100)/100;
-        object_sweep.style.background = `linear-gradient(0deg, rgba(0,255,12,1) ${100-percentage_distance}%, rgba(245,0,0,1) ${100-percentage_distance}%)`;
-        object_sweep.style.transform = `rotate(${i-90}deg)`;
-        RADAR.appendChild(object_sweep);
-        DISTANCESTATUS.innerHTML=  distance + "cm";
-        ANGLESTATUS.innerHTML= i + "°";
-        SWEEP.style.transform= `rotate(${i-90}deg)`
+        if(!flag){
+            break;
+        }
+        await renderObject(i);
     }
-    BUTTON.click();
+    if(flag){
+        STARTBUTTON.click();
+    }else{
+        flag = true;
+    }
 }
 
-BUTTON.addEventListener('click', startScanning);
+const stopScanning = ()=>{
+    flag = false;
+    STARTBUTTON.style.display = "block";
+    STOPBUTTON.style.display = "none";
+    DISTANCESTATUS.innerHTML= "? cm";
+    ANGLESTATUS.innerHTML = "?°";
+    OBJECTSTATUS.innerHTML = "Fuera de rango";
+}
+
+const renderObject = async (i) =>{
+    let object_sweep = document.createElement("div");
+    object_sweep.classList.add('objectSweep');
+    distance = await fetchDistance(i);
+    object_sweep.style.transform = `rotate(${i-90}deg)`;
+    RADAR.appendChild(object_sweep);
+    DISTANCESTATUS.innerHTML=  distance + "cm";
+    ANGLESTATUS.innerHTML= i + "°";
+    if(distance != "0"){
+        percentage_distance= (parseInt(distance)*100)/100; //el último 100 es el valor máximo de alcance
+        OBJECTSTATUS.innerHTML= "En rango";
+        object_sweep.style.background = `linear-gradient(0deg, rgba(0,255,12,1) ${percentage_distance}%, rgba(245,0,0,1) ${percentage_distance}%)`;
+    }else{
+        OBJECTSTATUS.innerHTML= "Fuera de rango";
+        object_sweep.style.background = `linear-gradient(0deg, rgba(0,255,12,1) 100%, rgba(245,0,0,1) 100%)`;
+    }
+}
+
+STARTBUTTON.addEventListener('click', startScanning);
+STOPBUTTON.addEventListener('click', stopScanning);

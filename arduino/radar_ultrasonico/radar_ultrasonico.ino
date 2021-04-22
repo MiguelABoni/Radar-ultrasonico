@@ -54,7 +54,7 @@ void loop(){
 
             longitud_angulo=header.substring(header.indexOf("longitud")+10,header.indexOf("longitud:")+11);
             angulo=header.substring(header.indexOf("angulo")+8,header.indexOf("angulo")+8+longitud_angulo.toInt());
-            if(angulo.toInt() >= 90 && angulo.toInt() <= 130){
+            if(angulo.toInt() >= 90 && angulo.toInt() <= 120){
               distancia="30";
             }else{
               distancia="0";
