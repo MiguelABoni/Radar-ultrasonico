@@ -64,18 +64,26 @@ body{
 .stopButton:hover{
     background-color: #d84d4d80;
 }
-.sweep,.angleSweep{
+.sweep,.angleSweep, .objectSweep{
     box-sizing: border-box;
     position: absolute;
     bottom: 13.5vh;
+    height: 42vw;
     transform-origin: 100% 100%;
 }
+
+.objectSweep{
+    width: 1px;
+    animation: fade-out;
+    animation-duration: 2.5s;
+    opacity: 0;
+}
+
 .angleSweep{
     width: 1px;
-    height: 42vw;
-    /* background-color: #24a533; */
-    background: linear-gradient(93deg, rgba(245,0,0,1) 70%, rgba(0,255,12,1) 30%);
-    }
+    background-color: #24a533;
+    /* background: linear-gradient(93deg, rgba(245,0,0,1) 70%, rgba(0,255,12,1) 30%); */
+}
 .angleSweep span{
     margin-left: .5em;
     font-size: 1.2em;
@@ -108,7 +116,6 @@ body{
 }
 .sweep {
     width: 10em;
-    height: 42vw;
     margin-right: 10em;
     border-right: solid 1px #4dd85d8e;
     border-radius: 0 0 0 100%;
@@ -161,7 +168,7 @@ body{
     .radar{
         background: repeating-radial-gradient(circle at 50% 85.5vh, #24a533, #24a533 3.5px, #1a1a19 5px, #1a1a19 10%);
     }
-    .sweep, .angleSweep{
+    .sweep, .angleSweep, .objectSweep{
         bottom:14.5vh;
     }
     .angleSweep:nth-of-type(1){
@@ -175,14 +182,19 @@ body{
     .radar{
         background: repeating-radial-gradient(circle at 50% 89.5vh, #24a533, #24a533 3.5px, #1a1a19 5px, #1a1a19 10%);
     }
-    .sweep, .angleSweep{
+    .sweep, .angleSweep, .objectSweep{
         bottom:10.5vh;
     }
     .angleSweep:nth-of-type(1){
         bottom: 10.7vh;
     }
 }
-@media screen and (min-width: 1280px){
-    .panel{
+
+@keyframes fade-out {
+    from{
+        opacity: 1;
+    }
+    to{
+        opacity: 0;
     }
 }

@@ -7,7 +7,7 @@ WiFiServer server(80);
 const char* ssid = "Idarraga";
 const char* password = "luna2020";
 String header; // Variable para guardar el HTTP request
-String distancia ="{\"distancia\":\"\"";
+String distancia ="0";
 String angulo;
 String longitud_angulo;
 String json="{\"angulo\":{";
@@ -54,8 +54,13 @@ void loop(){
 
             longitud_angulo=header.substring(header.indexOf("longitud")+10,header.indexOf("longitud:")+11);
             angulo=header.substring(header.indexOf("angulo")+8,header.indexOf("angulo")+8+longitud_angulo.toInt());
-            
-            client.println("{\"distancia\":\""+angulo+"\"}");              
+            if(angulo=="90"){
+              distancia="30";
+            }
+            if(angulo=="130"){
+              distancia="0";
+            }
+            client.println("{\"distancia\":\""+distancia+"\"}");              
             // la respuesta HTTP temina con una linea en blanco
             client.println();
             break;
