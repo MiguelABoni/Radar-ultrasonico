@@ -54,12 +54,12 @@ void loop(){
 
             longitud_angulo=header.substring(header.indexOf("longitud")+10,header.indexOf("longitud:")+11);
             angulo=header.substring(header.indexOf("angulo")+8,header.indexOf("angulo")+8+longitud_angulo.toInt());
-            if(angulo=="90"){
+            if(angulo.toInt() >= 90 && angulo.toInt() <= 130){
               distancia="30";
-            }
-            if(angulo=="130"){
+            }else{
               distancia="0";
             }
+
             client.println("{\"distancia\":\""+distancia+"\"}");              
             // la respuesta HTTP temina con una linea en blanco
             client.println();

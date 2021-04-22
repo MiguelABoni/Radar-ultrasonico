@@ -64,7 +64,7 @@ body{
 .stopButton:hover{
     background-color: #d84d4d80;
 }
-.sweep,.angleSweep, .objectSweep{
+.sweep, .angleSweep, .objectSweep{
     box-sizing: border-box;
     position: absolute;
     bottom: 13.5vh;
