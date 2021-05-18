@@ -81,6 +81,7 @@ body{
     animation: fade-out;
     animation-duration: 4s;
     opacity: 0;
+    background: linear-gradient(0deg, rgba(0,255,12,1) 100%, rgba(245,0,0,1) 100%);
 }
 
 .angleSweep{

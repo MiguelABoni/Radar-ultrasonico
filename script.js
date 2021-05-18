@@ -5,6 +5,7 @@ const OBJECTSTATUS = document.querySelector(".objectStatus");
 const STARTBUTTON = document.querySelector(".startButton");
 const STOPBUTTON = document.querySelector(".stopButton");
 const RADAR = document.querySelector(".radar");
+const MAXDISTANCE = 400;
 let percentage_distance = 0;
 let flag = true;
 
@@ -65,21 +66,20 @@ const resetValues= ()=> {
     OBJECTSTATUS.innerHTML = "Fuera de rango";
 }
 
-const renderObject = async (i) =>{
+const renderObject = async (angle) =>{
     let object_sweep = document.createElement("div");
     object_sweep.classList.add('objectSweep');
-    distance = await fetchDistance(i);
-    object_sweep.style.transform = `rotate(${i-90}deg)`;
+    distance = await fetchDistance(angle);
+    object_sweep.style.transform = `rotate(${angle-90}deg)`;
     RADAR.appendChild(object_sweep);
     DISTANCESTATUS.innerHTML=  distance + "cm";
-    ANGLESTATUS.innerHTML= i + "°";
+    ANGLESTATUS.innerHTML= angle + "°";
     if(distance != "0"){
-        percentage_distance= (parseInt(distance)*100)/100; //el último 100 es el valor máximo de alcance
+        percentage_distance= (parseInt(distance)*100)/MAXDISTANCE; //el último 100 es el valor máximo de alcance
         OBJECTSTATUS.innerHTML= "En rango";
         object_sweep.style.background = `linear-gradient(0deg, rgba(0,255,12,1) ${percentage_distance}%, rgba(245,0,0,1) ${percentage_distance}%)`;
     }else{
         OBJECTSTATUS.innerHTML= "Fuera de rango";
-        object_sweep.style.background = `linear-gradient(0deg, rgba(0,255,12,1) 100%, rgba(245,0,0,1) 100%)`;
     }
 }
 
