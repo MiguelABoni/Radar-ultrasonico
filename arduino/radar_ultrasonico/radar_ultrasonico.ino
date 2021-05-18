@@ -1,16 +1,20 @@
 #include <WiFi.h>
-//#include <Servo.h>
+#include <ESP32Servo.h>
 
 WiFiServer server(80);
+Servo radar;
 
 // credenciales de la red a la cual nos conectaremos
 const char* ssid = "Idarraga";
 const char* password = "luna2020";
 String header; // Variable para guardar el HTTP request
-String distancia ="0";
 String angulo;
 String longitud_angulo;
 String json="{\"angulo\":{";
+int trig =27;
+int echo = 26;
+int duracion;
+int distancia;
 
 
 void setup(){
@@ -28,6 +32,9 @@ void setup(){
     Serial.print("Conectado a la red con la IP: ");
     Serial.print(WiFi.localIP());
     server.begin(); // iniciamos el servidor
+    radar.attach(19);
+    pinMode(trig,OUTPUT);
+    pinMode(echo,INPUT);
 }
 
 void loop(){
@@ -54,13 +61,19 @@ void loop(){
 
             longitud_angulo=header.substring(header.indexOf("longitud")+10,header.indexOf("longitud:")+11);
             angulo=header.substring(header.indexOf("angulo")+8,header.indexOf("angulo")+8+longitud_angulo.toInt());
-            if(angulo.toInt() >= 90 && angulo.toInt() <= 120){
+            radar.write(angulo.toInt());
+            digitalWrite(trig,HIGH);
+            delay(1);
+            digitalWrite(trig,LOW);
+            duracion=pulseIn(echo,HIGH);
+            distancia = duracion/58.2;
+            /*if(angulo.toInt() >= 90 && angulo.toInt() <= 120){
               distancia="30";
             }else{
               distancia="0";
-            }
-
-            client.println("{\"distancia\":\""+distancia+"\"}");              
+            }*/
+            Serial.println(String(distancia));
+            client.println("{\"distancia\":\""+String(distancia)+"\"}");              
             // la respuesta HTTP temina con una linea en blanco
             client.println();
             break;

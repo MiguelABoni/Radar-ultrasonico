@@ -1,4 +1,4 @@
-const ESPURL = "http://192.168.0.105";
+const ESPURL = "http://192.168.0.111";
 const ANGLESTATUS = document.querySelector(".angleStatus");
 const DISTANCESTATUS = document.querySelector(".distanceStatus");
 const OBJECTSTATUS = document.querySelector(".objectStatus");
@@ -29,15 +29,22 @@ const startScanning = async()=>{
     STOPBUTTON.style.display = "block";
     for (let i = 0; i <= 180; i++) {
         if(!flag){
+            resetValues();
             break;
         }
         await renderObject(i);
+        // if (RADAR.childNodes[197-i]) {
+        //     RADAR.removeChild(RADAR.childNodes[197-i]);        
+        // }
+
     }
     for (let i = 179; i >=1; i--) {
         if(!flag){
+            resetValues();
             break;
         }
         await renderObject(i);
+        // RADAR.removeChild(RADAR.childNodes[196-i]);
     }
     if(flag){
         STARTBUTTON.click();
@@ -48,6 +55,9 @@ const startScanning = async()=>{
 
 const stopScanning = ()=>{
     flag = false;
+}
+
+const resetValues= ()=> {
     STARTBUTTON.style.display = "block";
     STOPBUTTON.style.display = "none";
     DISTANCESTATUS.innerHTML= "? cm";
