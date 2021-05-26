@@ -2,11 +2,11 @@
 #include <ESP32Servo.h>
 
 WiFiServer server(80);
-Servo radar;
+Servo servo;
 
 // credenciales de la red a la cual nos conectaremos
-const char* ssid = "Idarraga";
-const char* password = "luna2020";
+const char* ssid = "HOME-0572";
+const char* password = "FBE902627C401F3E";
 String header; // Variable para guardar el HTTP request
 String angulo;
 String longitud_angulo;
@@ -26,13 +26,12 @@ void setup(){
     while(WiFi.status() != WL_CONNECTED) { 
     delay(500);
     Serial.print(".");
-    
     }
     Serial.println("");
     Serial.print("Conectado a la red con la IP: ");
     Serial.print(WiFi.localIP());
     server.begin(); // iniciamos el servidor
-    radar.attach(19);
+    servo.attach(19);
     pinMode(trig,OUTPUT);
     pinMode(echo,INPUT);
 }
@@ -58,21 +57,23 @@ void loop(){
             client.println("Access-Control-Allow-Headers: Angulo,Longitud");
             client.println("Connection: close");
             client.println();
-
+            
             longitud_angulo=header.substring(header.indexOf("longitud")+10,header.indexOf("longitud:")+11);
             angulo=header.substring(header.indexOf("angulo")+8,header.indexOf("angulo")+8+longitud_angulo.toInt());
-            radar.write(angulo.toInt());
-            digitalWrite(trig,HIGH);
+            
+            servo.write(angulo.toInt());
+            
+            /*digitalWrite(trig,HIGH);
             delay(1);
             digitalWrite(trig,LOW);
+            duracion=pulseIn(echo,HIGH);*/
+            digitalWrite(trig,LOW);
+            delayMicroseconds(2);
+            digitalWrite(trig,HIGH);
+            delayMicroseconds(10);
+            digitalWrite(trig,LOW);
             duracion=pulseIn(echo,HIGH);
-            distancia = duracion/58.2;
-            /*if(angulo.toInt() >= 90 && angulo.toInt() <= 120){
-              distancia="30";
-            }else{
-              distancia="0";
-            }*/
-            Serial.println(String(distancia));
+            distancia = duracion/58;
             client.println("{\"distancia\":\""+String(distancia)+"\"}");              
             // la respuesta HTTP temina con una linea en blanco
             client.println();
