@@ -69,7 +69,7 @@ const resetValues= ()=> {
 const renderObject = async (angle) =>{
     let object_sweep = document.createElement("div");
     object_sweep.classList.add('objectSweep');
-    distance = await fetchDistance(angle);
+    distance = await fetchDistance(180 - angle);
     object_sweep.style.transform = `rotate(${angle-90}deg)`;
     RADAR.appendChild(object_sweep);
     ANGLESTATUS.innerHTML= angle + "°";
