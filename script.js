@@ -1,11 +1,11 @@
-const ESPURL = "http://192.168.1.69";
+const ESPURL = "http://192.168.1.13";
 const ANGLESTATUS = document.querySelector(".angleStatus");
 const DISTANCESTATUS = document.querySelector(".distanceStatus");
 const OBJECTSTATUS = document.querySelector(".objectStatus");
 const STARTBUTTON = document.querySelector(".startButton");
 const STOPBUTTON = document.querySelector(".stopButton");
 const RADAR = document.querySelector(".radar");
-const MAXDISTANCE = 200;
+const MAXDISTANCE = 400;
 let percentage_distance = 0;
 let flag = true;
 
