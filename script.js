@@ -6,6 +6,13 @@ const STARTBUTTON = document.querySelector(".startButton");
 const STOPBUTTON = document.querySelector(".stopButton");
 const RADAR = document.querySelector(".radar");
 const MAXDISTANCE = 400;
+let max_distance_BD = 0;
+let min_distance_BD = 0;
+let today;
+let max_distance_date;
+let min_distance_date;
+let max_distance_hour;
+let min_distance_hour;
 let percentage_distance = 0;
 let flag = true;
 
@@ -35,9 +42,8 @@ const startScanning = async()=>{
         }
         await renderObject(i);
         // if (RADAR.childNodes[197-i]) {
-        //     RADAR.removeChild(RADAR.childNodes[197-i]);        
+        //     RADAR.removeChild(RADAR.childNodes[197-i]);
         // }
-
     }
     for (let i = 179; i >=1; i--) {
         if(!flag){
@@ -73,6 +79,17 @@ const renderObject = async (angle) =>{
     object_sweep.style.transform = `rotate(${angle-90}deg)`;
     RADAR.appendChild(object_sweep);
     ANGLESTATUS.innerHTML= angle + "°";
+    if(angle == 0){
+        max_distance_BD = distance;
+        today = new Date();
+        max_distance_date = `${today.getDate()} - ${today.getMonth()} - ${today.getFullYear()}`;
+        max_distance_hour = `${today.getHours()}:${}`;
+    }else{
+        if(distance > max_distance_BD){
+            max_distance_BD = distance;
+            max_distance_date = 
+        }
+    }
     if(distance != "0" ){
         percentage_distance= (parseInt(distance)*100)/MAXDISTANCE; //el último 100 es el valor máximo de alcance
         if (distance > MAXDISTANCE) {
