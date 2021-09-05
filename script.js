@@ -1,4 +1,5 @@
 const ESPURL = "http://192.168.1.13";
+const BDURL = "https://radarultrasonico-default-rtdb.firebaseio.com/data/";
 const ANGLESTATUS = document.querySelector(".angleStatus");
 const DISTANCESTATUS = document.querySelector(".distanceStatus");
 const OBJECTSTATUS = document.querySelector(".objectStatus");
@@ -6,13 +7,17 @@ const STARTBUTTON = document.querySelector(".startButton");
 const STOPBUTTON = document.querySelector(".stopButton");
 const RADAR = document.querySelector(".radar");
 const MAXDISTANCE = 400;
-let max_distance_BD = 0;
-let min_distance_BD = 0;
+
+let options;
+
 let today;
-let max_distance_date;
-let min_distance_date;
-let max_distance_hour;
-let min_distance_hour;
+let date_lap;
+
+let max_distance_BD = 0;
+let max_distance_date_hour;
+let min_distance_BD = 0;
+let min_distance_date_hour;
+
 let percentage_distance = 0;
 let flag = true;
 
@@ -53,6 +58,24 @@ const startScanning = async()=>{
         await renderObject(i);
         // RADAR.removeChild(RADAR.childNodes[196-i]);
     }
+    try {
+        options = {
+            method: 'PUT',
+            body: {
+                'minDistance': {
+                    'date': min_distance_date_hour,
+                    'distance': min_distance_BD
+                },
+                'maxDistance': {
+                    'date': max_distance_date_hour,
+                    'distance': max_distance_BD
+                }
+            }
+        }
+        fetch(`${BDURL}${calculateDateHour()}.json`, options);
+    } catch (error) {
+        console.error(error);
+    }
     if(flag){
         STARTBUTTON.click();
     }else{
@@ -72,6 +95,13 @@ const resetValues= ()=> {
     OBJECTSTATUS.innerHTML = "Fuera de rango";
 }
 
+const calculateDateHour = () => {
+    today = new Date();
+    let date = `${today.getDate()} - ${today.getMonth()} - ${today.getFullYear()}`;
+    let hour = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
+    return date + hour;
+}
+
 const renderObject = async (angle) =>{
     let object_sweep = document.createElement("div");
     object_sweep.classList.add('objectSweep');
@@ -81,13 +111,17 @@ const renderObject = async (angle) =>{
     ANGLESTATUS.innerHTML= angle + "°";
     if(angle == 0){
         max_distance_BD = distance;
-        today = new Date();
-        max_distance_date = `${today.getDate()} - ${today.getMonth()} - ${today.getFullYear()}`;
-        max_distance_hour = `${today.getHours()}:${}`;
+        min_distance_BD = distance;
+        max_distance_date_hour = calculateDateHour();
+        min_distance_date_hour = max_distance_date_hour;
     }else{
         if(distance > max_distance_BD){
             max_distance_BD = distance;
-            max_distance_date = 
+            max_distance_date_hour = calculateDateHour();
+        }
+        if(distance < min_distance_BD){
+            min_distance_BD = distance;
+            min_distance_date_hour = calculateDateHour();
         }
     }
     if(distance != "0" ){
