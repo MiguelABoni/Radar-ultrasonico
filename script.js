@@ -1,4 +1,4 @@
-const ESPURL = "http://192.168.1.13";
+const ESPURL = "http://192.168.1.68";
 const BDURL = "https://radarultrasonico-default-rtdb.firebaseio.com/data/";
 const ANGLESTATUS = document.querySelector(".angleStatus");
 const DISTANCESTATUS = document.querySelector(".distanceStatus");
@@ -61,7 +61,10 @@ const startScanning = async()=>{
     try {
         options = {
             method: 'PUT',
-            body: {
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
                 'minDistance': {
                     'date': min_distance_date_hour,
                     'distance': min_distance_BD
@@ -70,9 +73,9 @@ const startScanning = async()=>{
                     'date': max_distance_date_hour,
                     'distance': max_distance_BD
                 }
-            }
+            })
         }
-        fetch(`${BDURL}${calculateDateHour()}.json`, options);
+        await fetch(`${BDURL}${calculateDateHour()}.json`, options);
     } catch (error) {
         console.error(error);
     }
@@ -97,9 +100,9 @@ const resetValues= ()=> {
 
 const calculateDateHour = () => {
     today = new Date();
-    let date = `${today.getDate()} - ${today.getMonth()} - ${today.getFullYear()}`;
+    let date = `${today.getDate()} - ${today.getMonth()+1} - ${today.getFullYear()}`;
     let hour = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
-    return date + hour;
+    return date + ' ' + hour;
 }
 
 const renderObject = async (angle) =>{
