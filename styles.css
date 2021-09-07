@@ -208,11 +208,10 @@ body{
     grid-area: ". name ." "sape char pape" ". date .";
     justify-content: center;
     align-items: center;
-    grid-template-areas: ;
+    /* grid-template-areas: ; */
     
 }
 
 button:nth-of-type(1){
     grid-area: name;
 }
-.buttons_grid:nth-child(1)

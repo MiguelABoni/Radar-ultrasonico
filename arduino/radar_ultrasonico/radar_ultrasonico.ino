@@ -1,3 +1,16 @@
+/**************************************************************
+  * NOMBRE DEL PROGRAMA: radar_ultrasonico --> E:\UNIVERSIDAD\TRABAJOS\SEMESTRE 5\ARQUITECTURA DE HARDWARE\PIF\RADAR ULTRASÓNICO\arduino\radar_ultrasonico.ino
+  * DISEÑADORES: MIGUEL ÁNGEL BEDOYA BONILLA Y SANTIAGO RESTREPO IDÁRRAGA
+  * CÓDIGO: 1001418288 Y 1001370117
+  * FECHA INICIO: 01/03/2021
+  * FECHA FINAL: 07/09/2021
+  * VERSIÓN: V 1.0
+  * DESCRIPCIÓN: Desarrollar, con ayuda del modulo (ESP32 lolin32) bajo la plataforma de desarrollo Arduino IDE, 
+  *              una Aplicación Web conectada vía WIFI, que garantice la recolección de datos a través de un sensor ultrasónico (HC-SR04) 
+  *              y la transferencia de datos mediante el protocolo HTTP (Hyper Text Transfer Protocol) hacia un dispositivo móvil y hacia una Base de Datos (Firebase).
+
+**************************************************************/
+
 #include <WiFi.h>
 #include <ESP32Servo.h>
 
@@ -66,8 +79,9 @@ void loop(){
             angulo=header.substring(header.indexOf("angulo")+8,header.indexOf("angulo")+8+longitud_angulo.toInt()); //Capturamos el ángulo en la posición respectiva del header de la petición, para ello necesitabamos la longitud del mismo
             servo.write(angulo.toInt());
             
-            distancia = calcularDistancia();
-            client.println("{\"distancia\":\""+String(distancia)+"\"}");              
+            distancia = calcularDistancia(); // calculamos la distancia en el ángulo que nos encontremos
+            Serial.println(distancia);
+            client.println("{\"distancia\":\""+String(distancia)+"\"}"); // Respuesta en formato json de la petición              
             // la respuesta HTTP temina con una linea en blanco
             client.println();
             break;
@@ -86,7 +100,7 @@ void loop(){
   }
 }
 
-int calcularDistancia(){
+int calcularDistancia(){ // función para calcular la distancia de un objeto con el sensor de ultrasonido
   
   /*digitalWrite(trig,HIGH); //Primera opción para calcular la distancia de acuerdo a la duración
   delay(1);
