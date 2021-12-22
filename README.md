@@ -1,6 +1,6 @@
 # Radar-ultrasonico
 
-college project about IOT, digital electronic and hardware architecture which is about an ultrasonic radar that detects objects as it rotates driven by a servomotor. This is connected to the local network via wifi and then, in each 180 degree path, it sends the data found to a firebase database in which we could analize that information about the place where it was operated.
+College project about IOT, digital electronic and hardware architecture which is about an ultrasonic radar that detects objects as it rotates driven by a servomotor. This is connected to the local network via wifi and then, in each 180 degree path, it sends the data found to a firebase database in which we could analize that information about the place where it was operated.
 
 ### Installation 🔧
 
