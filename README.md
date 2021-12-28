@@ -25,7 +25,7 @@ Just `git clone`
 ## Contributors ✒️
 
 * [Santiago Restrepo](https://github.com/Santiago-Restrepo) - *Development | Design | Deploy | Documentation*
-* [Miguel Angel Bedoya](https://github.com/https://github.com/MiguelABoni) - *Development | Design | Deploy* 
+* [Miguel Angel Bedoya](https://github.com/MiguelABoni) - *Development | Design | Deploy* 
 
 ---
 📖 made with ❤️ by [Santiago Restrepo](https://github.com/santiago-restrepo) 😊
